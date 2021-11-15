@@ -2,6 +2,6 @@ import sys
 
 a = 'a'
 
-for a <= 'z'
+for a <= ord('z')
 	write(a)
-	a++
+	a += ord(a)
