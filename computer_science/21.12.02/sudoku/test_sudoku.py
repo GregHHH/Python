@@ -1,7 +1,18 @@
-# dimensions de la grille, adaptable à plus grand
+
 size = 9
 
-# afficher la grille résolue
+
+grid = [[2, 5, 0, 0, 3, 0, 9, 0, 1],
+        [0, 1, 0, 0, 0, 4, 0, 0, 0],
+    	[4, 0, 7, 0, 0, 0, 2, 0, 8],
+    	[0, 0, 5, 2, 0, 0, 0, 0, 0],
+ 		[0, 0, 0, 0, 9, 8, 1, 0, 0],
+    	[0, 4, 0, 0, 0, 3, 0, 0, 0],
+    	[0, 0, 0, 3, 6, 0, 0, 7, 2],
+    	[0, 7, 0, 0, 0, 0, 0, 0, 3],
+    	[9, 0, 3, 0, 0, 0, 6, 0, 4]]
+
+
 def display(a):
     for i in range(size):
         for j in range(size):
@@ -16,8 +27,7 @@ def solved(grid, row, col, num):
     for x in range(size):
         if grid[x][col] == num:
             return False
- 
- 
+
     startRow = row - row % 3
     startCol = col - col % 3
     for i in range(3):
@@ -45,16 +55,7 @@ def Solver(grid, row, col):
         grid[row][col] = 0
     return False
  
-# grille de départ
-grid = [[2, 5, 0, 0, 3, 0, 9, 0, 1],
-        [0, 1, 0, 0, 0, 4, 0, 0, 0],
-    	[4, 0, 7, 0, 0, 0, 2, 0, 8],
-    	[0, 0, 5, 2, 0, 0, 0, 0, 0],
- 		[0, 0, 0, 0, 9, 8, 1, 0, 0],
-    	[0, 4, 0, 0, 0, 3, 0, 0, 0],
-    	[0, 0, 0, 3, 6, 0, 0, 7, 2],
-    	[0, 7, 0, 0, 0, 0, 0, 0, 3],
-    	[9, 0, 3, 0, 0, 0, 6, 0, 4]]
+
 
 if (Solver(grid, 0, 0)):
     display(grid)
