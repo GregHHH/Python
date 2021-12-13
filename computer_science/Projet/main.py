@@ -1,49 +1,67 @@
-import numpy as np
-import random
-import sys
+from generate import *
 
+# Tableau de jeu
 frame = np.array([
-		[1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 1, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 1, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 1, 1, 0],
+        [0, 1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 1, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0]])
-
-# def generate(lin, col, density):
-#  	nbr_1 = int((lin * col) * (density / 100))
-#     nbr_0 = int((lin * col) - nbr_1)
-#     frame = int(nbr_1)*[1] + int(nbr_0)*[0]
-#     random.shuffle(frame)
-#     frame = np.reshape(frame, (lin, col))
-#     print(frame)
+		[0, 0, 0, 0, 0, 0, 0, 0, 0]])
 
 def compute_number_neighbors(paded_frame, index_line, index_column):
 	number_neighbors = 0
-	for i in range(index_line - 1, index_line + 1):
-		for j in range(index_column - 1, index_column + 1):
-			if frame[i][j] == 1:
-				number_neighbors += number_neighbors
-			else:
-				continue
+	for i in range(index_line - 1, index_line + 2):
+		for j in range(index_column - 1, index_column + 2):
+				number_neighbors = number_neighbors + frame[i][j]
 	number_neighbors = number_neighbors - paded_frame[index_line][index_column]
 	return number_neighbors
 
 def compute_next_frame (frame):
 	paded_frame = np.pad(frame, 1, mode='constant')
-	return frame
+	return paded_frame
 
-
-print(frame)
-print(compute_number_neighbors(frame,5,6))
-frame = compute_next_frame(frame)
+def copy_with_rules(frame):
 	
+	size_lin = len(frame)
+	size_col = len(frame[0])
+	cp_frame = np.empty((size_lin, size_col), int)
+ # TODO: quelque chose louche avec size: IndexError: index 10 is out of bounds for axis 0 with size 10
+ #TODO: les bordures disparaissent lors de l'utilisation d'une grille :((((((
+	for i in range(1, size_lin - 1 ):
+		for j in range(1, size_col - 1 ):
+			# On applique les règles du Jeu de la Vie
+			if frame[i][j] == 0 and compute_number_neighbors(frame, i, j) == 3:
+				cp_frame[i][j] = 1
+			elif frame[i][j] == 1 and (compute_number_neighbors(frame, i, j) == 2 or compute_number_neighbors(frame, i, j) == 3):
+				cp_frame[i][j] = 1
+			else:
+				cp_frame[i][j] = 0
+	return cp_frame
 
-# valeurs par défaut du tableau: 6x6 avec densité de cellules vivantes de 15%
-# nbr_line = int(sys.argv[2]) if len(sys.argv) >= 2 else int(6)
-# nbr_column = int(sys.argv[2]) if len(sys.argv) >= 3 else int(6)
-# density = int(sys.argv[2]) if len(sys.argv) >= 4 else int(15)
-# generate(nbr_line, nbr_column, density)
+#TODO: Probleme avec les itération 1 sur 2 (souvent mais pas toujours) :nombres random (problème mémoire ?) 
+#TODO: Verif avec les cellules qui prennent vie dans la bordure : disparition de la figure :( (encore  incrémenter la taille de la bordure à ce moment ?)
+
+
+size_lin = len(frame)
+# size_lin = int(sys.argv[2]) if len(sys.argv) >= 2 else int(6)
+size_col = len(frame[0])
+# size_col = int(sys.argv[2]) if len(sys.argv) >= 3 else int(6)
+
+#density = int(sys.argv[2]) if len(sys.argv) >= 4 else int(15)
+# frame = generate(size_lin, size_col, density)
+# frame = compute_next_frame(frame)
+i = 0
+frame = compute_next_frame(frame)
+
+while 10:
+	os.system('clear')
+	print(frame)
+	print(i)
+	i += 1
+	time.sleep(0.2)
+	frame = copy_with_rules(frame)
+	

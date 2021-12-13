@@ -1,17 +1,17 @@
 import numpy as np
-import random
+import random 
+import time
 import sys
-
+import os
 def generate(lin, col, density):
  
-    
-    
     nbr_1 = int((lin * col) * (density / 100))
     nbr_0 = int((lin * col) - nbr_1)
     grid = int(nbr_1)*[1] + int(nbr_0)*[0]
     random.shuffle(grid)
     grid = np.reshape(grid, (lin, col))
-    print(grid)
+    #print(grid)
+    return grid
    
 #TODO
 # génerer un certain pourcentage de 1 dans la grille.
@@ -24,10 +24,5 @@ def generate(lin, col, density):
     #             grid[i][j] = 1
      # compteur pour ne pas depasser la densité
 
-    np.savetxt("array.txt", grid, fmt="%s")
+    # np.savetxt("array.txt", grid, fmt="%s")
 #-----------------------------------------------------------------------------------------
-
-nbr_line = int(sys.argv[2]) if len(sys.argv) >= 2 else int(6)
-nbr_column = int(sys.argv[2]) if len(sys.argv) >= 3 else int(6)
-density = int(sys.argv[2]) if len(sys.argv) >= 4 else int(15)
-generate(nbr_line, nbr_column, density)
