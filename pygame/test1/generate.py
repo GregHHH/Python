@@ -1,17 +1,18 @@
+import pygame as pg
 import numpy as np
 import random
 #import pygame
 import time
 import sys
 import os
-def generate(lin, col, density):
 
+def generate(lin, col, density):
     nbr_1 = int((lin * col) * (density / 100))
     nbr_0 = int((lin * col) - nbr_1)
     grid = int(nbr_1)*[1] + int(nbr_0)*[0]
     random.shuffle(grid)
     grid = np.reshape(grid, (lin, col))
-    #print(grid)
+    np.savetxt("array.txt", grid, fmt="%s")
     return grid
 
 #TODO
@@ -25,5 +26,5 @@ def generate(lin, col, density):
     #             grid[i][j] = 1
      # compteur pour ne pas depasser la densité
 
-    # np.savetxt("array.txt", grid, fmt="%s")
+    
 #-----------------------------------------------------------------------------------------
