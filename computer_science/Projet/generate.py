@@ -1,10 +1,11 @@
 import numpy as np
-import random 
+import random
+#import pygame
 import time
 import sys
 import os
 def generate(lin, col, density):
- 
+
     nbr_1 = int((lin * col) * (density / 100))
     nbr_0 = int((lin * col) - nbr_1)
     grid = int(nbr_1)*[1] + int(nbr_0)*[0]
@@ -12,7 +13,7 @@ def generate(lin, col, density):
     grid = np.reshape(grid, (lin, col))
     #print(grid)
     return grid
-   
+
 #TODO
 # génerer un certain pourcentage de 1 dans la grille.
 

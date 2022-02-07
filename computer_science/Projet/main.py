@@ -1,7 +1,7 @@
 from generate import *
 
 # Tableau de jeu
-frame = np.array([
+""" frame = np.array([
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -11,7 +11,7 @@ frame = np.array([
         [0, 0, 0, 0, 1, 1, 1, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0]])
-
+ """
 def compute_number_neighbors(paded_frame, index_line, index_column):
 	number_neighbors = 0
 	for i in range(index_line - 1, index_line + 2):
@@ -42,7 +42,7 @@ def copy_with_rules(frame):
 				cp_frame[i][j] = 0
 	return cp_frame
 
-#TODO: Probleme avec les itération 1 sur 2 (souvent mais pas toujours) :nombres random (problème mémoire ?) 
+#TODO: Probleme avec les itération 1 sur 2 (souvent mais pas toujours) :nombres random (semble lié à pygame, quand include present, bug, sinon affichage normal.) 
 #TODO: Verif avec les cellules qui prennent vie dans la bordure : disparition de la figure :( (encore  incrémenter la taille de la bordure à ce moment ?)
 
 
@@ -57,11 +57,10 @@ size_col = len(frame[0])
 i = 0
 frame = compute_next_frame(frame)
 
-while 10:
+while True:
 	os.system('clear')
 	print(frame)
 	print(i)
 	i += 1
 	time.sleep(0.2)
 	frame = copy_with_rules(frame)
-	
