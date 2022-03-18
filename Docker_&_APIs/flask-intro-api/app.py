@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask_restful import Api
 from resources.users import UsersApi, UserApi
+from markupsafe import escape
 
 app = Flask(__name__, instance_relative_config=True)
 
