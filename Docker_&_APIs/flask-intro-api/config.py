@@ -11,5 +11,4 @@ load_dotenv(verbose=True)
 
 ## Get these value from .env or from environnement
 STRAPI_HOST = os.getenv("STRAPI_HOST", default="localhost:3000")
-MONGO_URI = os.getenv("MONGO_URI", default="mongodb://localhost:27017/app")
-JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", default="")
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", default="secret-key-123")

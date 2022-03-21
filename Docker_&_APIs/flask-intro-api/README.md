@@ -14,7 +14,7 @@
 
 1. Create a new conda env named md4-api (if you haven't already) for the project in the Conda application or in the terminal:
 ```
-conda create --name md4-api python=3.7
+conda create --name md4-api python=3.7 
 ```
 
 2. Activate the conda env (you can check your availables env with: conda env list):
